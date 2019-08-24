@@ -115,6 +115,22 @@ function createDocBlock() {
     //container.appendChild(renderDiv);
 }
 
+function textEntry() {
+    //Creo un nuevo bloque contenedor, y le asigno un id
+    var mainContainer = document.getElementById('viewer');
+    var contBlock = createDocBlock();
+    var idNumber = appConfig.docBlocks;
+    var idString = "render-cont-"+idNumber.toString();
+    appConfig.docBlocks = idNumber+1;
+    contBlock.setAttribute("id", idString);
+    mainContainer.appendChild(contBlock);
+
+    var text = document.getElementById("textInput").value;
+    var container = document.getElementById(idString);
+    container.innerHTML = "<p>"+text+"</p>";
+
+}
+
 // Funciones de botones:
 function renderAll() {
     console.log("Hola");
@@ -128,6 +144,6 @@ function renderAll() {
 }
 
 function renderFullDoc() {
-    var obj = getFullDocument()
-    painterMolecule2D(obj)
+    var obj = getFullDocument();
+    painterMolecule2D(obj);
 }
