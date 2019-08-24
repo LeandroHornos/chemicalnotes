@@ -3,27 +3,37 @@
 var composer = new Kekule.Editor.Composer(document.getElementById('composer-container'));
 
 //configuracion de botones:
-composer.setCommonToolButtons(['loadData', 'undo', 'redo', 'copy', 'cut', 'paste']);
-composer.setChemToolButtons(['manipulate', 'erase', 'bond', 'atomAndFormula',
-    'ring', 'charge', 'glyph', 'textAndImage']);
+
+var appConfig = {
+    commonButtons: ['loadData', 'undo', 'redo', 'copy', 'cut', 'paste'],
+    chemToolButtons: ['manipulate', 'erase', 'bond', 'atomAndFormula',
+    'ring', 'charge', 'glyph', 'textAndImage']
+};
+
+composer.setCommonToolButtons(appConfig.commonButtons);
+composer.setChemToolButtons(appConfig.chemToolButtons);
 
 
-/*---Funciones del Editor----*/
+/*---Funciones del Editor--------------------------------*/
+
+// Obtener la info en el editor:
 function getFullDocument() {
     //devuelve el objeto completo dibujado en el editor
-    var chemDoc = composer.getChemObj()
-    console.log(chemDoc)
+    var chemDoc = composer.getChemObj();
+    console.log(chemDoc);
+    return chemDoc;
 }
 
 function getAllMolecules() {
     //devuelve un array con todas las moleculas
-    var molecules = composer.exportObjs(Kekule.Molecule)
-    console.log(molecules)
+    var molecules = composer.exportObjs(Kekule.Molecule);
+    console.log(molecules);
 }
 
+// Funciones de renderizado:
 function painterMolecule2D(mol) {
     //Dibuja una molecula en 2 dimensiones
-    var renderType = Kekule.Render.RendererType.R2D//R3D  // do 2D or 3D drawing
+    var renderType = Kekule.Render.RendererType.R2D;//R3D  // do 2D or 3D drawing
     // parent element, we will draw inside it
     var parentElem = document.getElementById('render');
     // Esta linea limpia el contenido previo. 
@@ -35,26 +45,15 @@ function painterMolecule2D(mol) {
 
     // create context inside parentElem
     var dim = Kekule.HtmlElementUtils.getElemOffsetDimension(parentElem); // get width/height of parent element
-    console.log(dim)
+    console.log(dim);
     var context = painter.createContext(parentElem, dim.width, dim.height); // create context fulfill parent element
 
     // at last, draw the molecule at the center of context
     painter.draw(context, {'x': dim.width / 2, 'y': dim.height /2});
 }
 
-function renderAll() {
-    console.log("Hola")
-    var molecules = composer.exportObjs(Kekule.Molecule)
-    console.log(molecules)
-    console.log(molecules.length)
-    for (var i = 0; i<molecules.length; i++) {
-        console.log(molecules[i])
-        painterMolecule2D(molecules[i])
-    }
-}
-
 function renderMolecule2D(mol) {
-    var renderType = Kekule.Render.RendererType.R2D//R3D  // do 2D or 3D drawing
+    var renderType = Kekule.Render.RendererType.R2D;//R3D  // do 2D or 3D drawing
     var is3D = (renderType === Kekule.Render.RendererType.R3D);
 
     // parent HTML element, we will draw inside it
@@ -68,7 +67,8 @@ function renderMolecule2D(mol) {
     var drawBridge = drawBridgeManager.getPreferredBridgeInstance();
 
     // then create render context by drawBridge first
-    var dim = Kekule.HtmlElementUtils.getElemOffsetDimension(parentElem); // get width/height of parent element
+    var dim = Kekule.HtmlElementUtils.getElemOffsetDimension(parentElem);
+    console.log(dim); // get width/height of parent element
     var context = drawBridge.createContext(parentElem, dim.width, dim.height);  // create context fulfill parent element
 
     // then create suitable renderer to render molecule object
@@ -93,12 +93,24 @@ function renderMolecule2D(mol) {
     var configObj = is3D? Kekule.Render.Render3DConfigs.getInstance():
     Kekule.Render.Render2DConfigs.getInstance();
     var options = Kekule.Render.RenderOptionUtils.convertConfigsToPlainHash(configObj);
-    console.log(options)
+    console.log(options);
     // at last, draw the molecule to the center of context
     renderer.draw(context, {'x': dim.width / 2, 'y': dim.height / 2}, options);
 }
 
-function renderFirst() {
-    var mol = composer.exportObjs(Kekule.Molecule)[0]
-    renderMolecule2D(mol)
+// Funciones de botones:
+function renderAll() {
+    console.log("Hola");
+    var molecules = composer.exportObjs(Kekule.Molecule);
+    console.log(molecules);
+    console.log(molecules.length);
+    for (var i = 0; i<molecules.length; i++) {
+        console.log(molecules[i]);
+        painterMolecule2D(molecules[i]);
+    }
+}
+
+function renderFullDoc() {
+    var obj = getFullDocument()
+    painterMolecule2D(obj)
 }
