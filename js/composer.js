@@ -5,6 +5,7 @@ var composer = new Kekule.Editor.Composer(document.getElementById('composer-cont
 //configuracion de botones:
 
 var appConfig = {
+    docBlocks: 0,
     commonButtons: ['loadData', 'undo', 'redo', 'copy', 'cut', 'paste'],
     chemToolButtons: ['manipulate', 'erase', 'bond', 'atomAndFormula',
     'ring', 'charge', 'glyph', 'textAndImage']
@@ -35,7 +36,15 @@ function painterMolecule2D(mol) {
     //Dibuja una molecula en 2 dimensiones
     var renderType = Kekule.Render.RendererType.R2D;//R3D  // do 2D or 3D drawing
     // parent element, we will draw inside it
-    var parentElem = document.getElementById('render');
+    var mainContainer = document.getElementById('viewer');
+    //Creo un nuevo bloque contenedor, y le asigno un id
+    var contBlock = createDocBlock();
+    var idNumber = appConfig.docBlocks;
+    var idString = "render-cont-"+idNumber.toString();
+    appConfig.docBlocks = idNumber+1
+    contBlock.setAttribute("id", idString)
+    mainContainer.appendChild(contBlock)
+    var parentElem = document.getElementById(idString);
     // Esta linea limpia el contenido previo. 
     //Dejar comentada si se quiere renderizar mas de una molecula
     //Kekule.DomUtils.clearChildContent(parentElem);
@@ -96,6 +105,14 @@ function renderMolecule2D(mol) {
     console.log(options);
     // at last, draw the molecule to the center of context
     renderer.draw(context, {'x': dim.width / 2, 'y': dim.height / 2}, options);
+}
+
+function createDocBlock() {
+    //var container = document.getElementById("viewer");
+    var renderDiv = document.createElement("div");
+    renderDiv.setAttribute("class", "molecule-container");
+    return renderDiv;
+    //container.appendChild(renderDiv);
 }
 
 // Funciones de botones:

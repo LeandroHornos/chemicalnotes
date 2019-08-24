@@ -10,17 +10,23 @@
 </head>
 <body>
     <div id="main-container">
+        <h2>Render</h2>
+        <div id="viewer" class="viewer">
+        </div>
+        <div class="spacer"></div>
+        <div id="textInputCont">
+            <textarea name="textInput" id="textInput" cols="30" rows="5"></textarea>
+            <button>Enviar</button>
+        </div>
         <div id="composer-container"></div>
         <div class="btn-container">
             <button class="boton" onclick=getFullDocument()>Documento</button>
             <button class="boton" onclick=getAllMolecules()>Moleculas</button>
             <button class="boton" onclick=renderAll()>Painter All</button>
             <button class="boton" onclick=renderFullDoc()>FullDoc</button>
+            <button class="boton" onclick=createDocBlock()>DockBlock</button>
         </div>
-        <h2>Render</h2>
-        <div id="viewer" class="viewer">
-            <div id="render" class="molecule-container"></div>
-        </div>
+
         
     </div>
     <script src="js/raphael-2.3.0/raphael.min.js"></script>
