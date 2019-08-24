@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kekule-Static-App</title>
+    <link rel="stylesheet" type="text/css" href="./js/kekule/themes/default/kekule.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="main-container">
+        <div id="composer-container"></div>
+        <div class="btn-container">
+            <button class="boton" onclick=getFullDocument()>Documento</button>
+            <button class="boton" onclick=getAllMolecules()>Moleculas</button>
+            <button class="boton" onclick=renderAll()>Painter All</button>
+            <button class="boton" onclick=renderFirst()>Render</button>
+        </div>
+        <h2>Render</h2>
+        <div id="viewer" class="viewer">
+            <div id="render" class="molecule-container"></div>
+        </div>
+        
+    </div>
+    <script src="js/raphael-2.3.0/raphael.min.js"></script>
+    <script src="js/kekule/kekule.min.js"></script>
+    <script src="js/composer.js"></script>
+</body>
+</html>
