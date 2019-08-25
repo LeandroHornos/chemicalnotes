@@ -115,7 +115,11 @@ function createDocBlock() {
     //container.appendChild(renderDiv);
 }
 
-function textEntry() {
+
+
+// Funciones de botones:
+
+function createTextEntry() {
     //Creo un nuevo bloque contenedor, y le asigno un id
     var mainContainer = document.getElementById('viewer');
     var contBlock = createDocBlock();
@@ -131,19 +135,7 @@ function textEntry() {
 
 }
 
-// Funciones de botones:
-function renderAll() {
-    console.log("Hola");
-    var molecules = composer.exportObjs(Kekule.Molecule);
-    console.log(molecules);
-    console.log(molecules.length);
-    for (var i = 0; i<molecules.length; i++) {
-        console.log(molecules[i]);
-        painterMolecule2D(molecules[i]);
-    }
-}
-
-function renderFullDoc() {
+function renderEditorContent() {
     var obj = getFullDocument();
     painterMolecule2D(obj);
 }
