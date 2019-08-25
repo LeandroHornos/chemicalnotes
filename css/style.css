@@ -18,15 +18,14 @@
 
 #composer-container {
     display: flex;
-    box-sizing: border-box;
     width: 80%;
     min-width: 400px;
     min-height: 20vh;
     justify-content: center;
     align-items: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0 ,0.5);
-    padding: 20px;
     background: white;
+    margin-bottom: 10px;
 
 }
 
@@ -44,6 +43,8 @@
     height: 15vh;
     width: 70%;
     padding: 15px;
+    background: none;
+    font-size: 16px;
 }
 
 #textInputCont button {
@@ -51,9 +52,10 @@
     width: 20%;
     background: rgb(54, 192, 134);
     color: white;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
     border-radius: 0 50px 0 0;
+    
 }
 
 textarea:focus, input:focus, button:focus {
@@ -67,7 +69,8 @@ textarea:focus, input:focus, button:focus {
 
 .btn-container {
     display: flex;
-    padding: 20px;
+    width: 80%;
+    justify-content: center;
 }
 
 .boton {
@@ -75,6 +78,11 @@ textarea:focus, input:focus, button:focus {
     margin: 2px;
     background: rgb(35, 158, 107);
     color: white;
+    font-size: 20px;
+    width: 100%;
+    height: 10vh;
+    border-radius: 0 0 20px 20px;
+    font-weight: bold;
 }
 
 .viewer {
