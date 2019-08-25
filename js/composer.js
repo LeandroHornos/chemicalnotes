@@ -2,13 +2,20 @@
 /*-------- EDITOR (COMPOSER)----------- */
 var composer = new Kekule.Editor.Composer(document.getElementById('composer-container'));
 
-//configuracion de botones:
+//configuracion:
 
 var appConfig = {
-    docBlocks: 0,
     commonButtons: ['loadData', 'undo', 'redo', 'copy', 'cut', 'paste'],
     chemToolButtons: ['manipulate', 'erase', 'bond', 'atomAndFormula',
     'ring', 'charge', 'glyph', 'textAndImage']
+};
+
+//Estado, aquí se almacena la info generada:
+
+var appState = {
+    docBlocks: 0,
+    entries: [],
+    molecules: []
 };
 
 composer.setCommonToolButtons(appConfig.commonButtons);
@@ -31,7 +38,7 @@ function getAllMolecules() {
     console.log(molecules);
 }
 
-// Funciones de renderizado:
+// Renderizado:
 function painterMolecule2D(mol) {
     //Dibuja una molecula en 2 dimensiones
     var renderType = Kekule.Render.RendererType.R2D;//R3D  // do 2D or 3D drawing
@@ -39,9 +46,9 @@ function painterMolecule2D(mol) {
     var mainContainer = document.getElementById('viewer');
     //Creo un nuevo bloque contenedor, y le asigno un id
     var contBlock = createDocBlock();
-    var idNumber = appConfig.docBlocks;
+    var idNumber = appState.docBlocks;
     var idString = "render-cont-"+idNumber.toString();
-    appConfig.docBlocks = idNumber+1
+    appState.docBlocks = idNumber+1
     contBlock.setAttribute("id", idString)
     mainContainer.appendChild(contBlock)
     var parentElem = document.getElementById(idString);
@@ -59,6 +66,17 @@ function painterMolecule2D(mol) {
 
     // at last, draw the molecule at the center of context
     painter.draw(context, {'x': dim.width / 2, 'y': dim.height /2});
+    //guardo la info de la entrada
+    var entryInfo = {
+        type: "chem",
+        idNumber: idNumber,
+        idString: idString,
+        content: mol
+    }
+    console.log(entryInfo)
+    //guardo la entrada en appState
+    appState.entries.push(entryInfo);
+    console.log(appState.entries);
 }
 
 function renderMolecule2D(mol) {
@@ -123,19 +141,30 @@ function createTextEntry() {
     //Creo un nuevo bloque contenedor, y le asigno un id
     var mainContainer = document.getElementById('viewer');
     var contBlock = createDocBlock();
-    var idNumber = appConfig.docBlocks;
+    var idNumber = appState.docBlocks;
     var idString = "render-cont-"+idNumber.toString();
-    appConfig.docBlocks = idNumber+1;
+    appState.docBlocks = idNumber+1;
     contBlock.setAttribute("id", idString);
     mainContainer.appendChild(contBlock);
 
     var text = document.getElementById("textInput").value;
     var container = document.getElementById(idString);
     container.innerHTML = "<p>"+text+"</p>";
-
+    //guardo la info de la entrada
+    var entryInfo = {
+        type: "text",
+        idNumber: idNumber,
+        idString: idString,
+        content: text
+    }
+    console.log(entryInfo)
+    //guardo la entrada en appState
+    appState.entries.push(entryInfo);
+    console.log(appState.entries);
 }
 
 function renderEditorContent() {
     var obj = getFullDocument();
     painterMolecule2D(obj);
+    
 }
