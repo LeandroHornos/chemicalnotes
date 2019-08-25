@@ -5,9 +5,10 @@ var composer = new Kekule.Editor.Composer(document.getElementById('composer-cont
 //configuracion:
 
 var appConfig = {
-    commonButtons: ['loadData', 'undo', 'redo', 'copy', 'cut', 'paste'],
-    chemToolButtons: ['manipulate', 'erase', 'bond', 'atomAndFormula',
-    'ring', 'charge', 'glyph', 'textAndImage']
+    commonButtons: ['newDoc', 'loadData', 'undo', 'copy', 'cut', 'paste',
+    'zoomIn', 'reset', 'zoomOut'],
+    chemToolButtons: ['manipulate', 'erase', 'bond', 'atom', 'formula',
+    'ring', 'charge', 'textAndImage']
 };
 
 //Estado, aquí se almacena la info generada:
@@ -45,7 +46,7 @@ function painterMolecule2D(mol) {
     // parent element, we will draw inside it
     var mainContainer = document.getElementById('viewer');
     //Creo un nuevo bloque contenedor, y le asigno un id
-    var contBlock = createDocBlock();
+    var contBlock = createChemBlock();
     var idNumber = appState.docBlocks;
     var idString = "render-cont-"+idNumber.toString();
     appState.docBlocks = idNumber+1
@@ -125,10 +126,18 @@ function renderMolecule2D(mol) {
     renderer.draw(context, {'x': dim.width / 2, 'y': dim.height / 2}, options);
 }
 
-function createDocBlock() {
+function createChemBlock() {
     //var container = document.getElementById("viewer");
     var renderDiv = document.createElement("div");
     renderDiv.setAttribute("class", "molecule-container");
+    return renderDiv;
+    //container.appendChild(renderDiv);
+}
+
+function createTextBlock() {
+    //var container = document.getElementById("viewer");
+    var renderDiv = document.createElement("div");
+    renderDiv.setAttribute("class", "text-container");
     return renderDiv;
     //container.appendChild(renderDiv);
 }
@@ -140,7 +149,7 @@ function createDocBlock() {
 function createTextEntry() {
     //Creo un nuevo bloque contenedor, y le asigno un id
     var mainContainer = document.getElementById('viewer');
-    var contBlock = createDocBlock();
+    var contBlock = createTextBlock();
     var idNumber = appState.docBlocks;
     var idString = "render-cont-"+idNumber.toString();
     appState.docBlocks = idNumber+1;
