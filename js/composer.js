@@ -7,7 +7,7 @@ var composer = new Kekule.Editor.Composer(document.getElementById('composer-cont
 var appConfig = {
     commonButtons: ['newDoc', 'loadData', 'undo', 'copy', 'cut', 'paste',
     'zoomIn', 'reset', 'zoomOut'],
-    chemToolButtons: ['manipulate', 'erase', 'bond', 'atom', 'formula',
+    chemToolButtons: ['manipulate', 'erase', 'bond', 'atom', 'glyph','formula',
     'ring', 'charge', 'textAndImage']
 };
 
