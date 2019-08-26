@@ -127,8 +127,14 @@ h2 {
 
 }
 
-@media only screen and (min-width: 600px) {
-  .text-container,#textInputCont textarea {
+@media only screen and (min-width: 800px) {
+  .text-container {
     font-size: 20px;
   }
+   #textInputCont textarea {
+    font-size: 20px;
+  }
+    #textInputCont ::placeholder {
+    font-size: 20px;
+}
 }
