@@ -26,7 +26,6 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0 ,0.5);
     background: white;
     margin-bottom: 10px;
-
 }
 
 #textInputCont {
@@ -105,8 +104,9 @@ textarea:focus, input:focus, button:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 15vh;
+    heigth: auto;
     width: 100%;
+    word-wrap:break-word;
 
 
 }
