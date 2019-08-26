@@ -49,6 +49,7 @@ body {
     padding: 15px;
     background: none;
     font-size: 0.8em;
+    resize: none;
 }
 
 
