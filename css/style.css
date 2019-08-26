@@ -115,6 +115,7 @@ textarea:focus, input:focus, button:focus {
     height: auto;
     font-size: 14px;
     text-align: center;
+    padding: 20px 0;
 }
 .spacer {
     width:100%;
