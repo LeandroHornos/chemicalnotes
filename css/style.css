@@ -101,9 +101,10 @@ textarea:focus, input:focus, button:focus {
     align-items: center;
 }
 
-.text-container{
+.text-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     min-height: 15vh;
     width: 100%;
 
@@ -126,3 +127,8 @@ h2 {
 
 }
 
+@media only screen and (min-width: 600px) {
+  .text-container,#textInputCont textarea {
+    font-size: 20px;
+  }
+}
