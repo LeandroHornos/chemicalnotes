@@ -104,7 +104,7 @@ textarea:focus, input:focus, button:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    heigth: auto;
+    height: auto;
     width: 100%;
     word-wrap:break-word;
     padding: 1.25em;
